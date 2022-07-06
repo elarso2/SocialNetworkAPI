@@ -1,6 +1,5 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 const thoughtSchema = require("./Thought");
-const reactionSchema = require("./Reaction");
 
 const userSchema = new Schema(
   {
@@ -34,6 +33,7 @@ const userSchema = new Schema(
       getters: true,
       virtuals: true,
     },
+    id: false,
   }
 );
 

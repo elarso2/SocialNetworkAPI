@@ -1,4 +1,4 @@
-const { Schema, model, default: mongoose } = require("mongoose");
+const { Schema, Types, model, default: mongoose } = require("mongoose");
 const userSchema = require("./User");
 const formatDate = require("../utils/date");
 
@@ -16,12 +16,11 @@ const reactionSchema = new mongoose.Schema(
     username: {
       type: String,
       require: true,
-      ref: "user",
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: formateData,
+      get: formatDate,
     },
   },
   {
@@ -47,13 +46,13 @@ const thoughtSchema = new Schema(
     username: {
       type: String,
       require: true,
-      ref: "user",
     },
     reactions: [reactionSchema],
   },
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
     id: false,
   }
