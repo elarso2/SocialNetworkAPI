@@ -4,7 +4,10 @@ const formatDate = require("../utils/date");
 
 const reactionSchema = new mongoose.Schema(
   {
-    reactionId: {},
+    reactionId: {
+      type: mongoose.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
     reactionBody: {
       type: String,
       require: true,
@@ -13,6 +16,7 @@ const reactionSchema = new mongoose.Schema(
     username: {
       type: String,
       require: true,
+      ref: "user",
     },
     createdAt: {
       type: Date,
@@ -43,6 +47,7 @@ const thoughtSchema = new Schema(
     username: {
       type: String,
       require: true,
+      ref: "user",
     },
     reactions: [reactionSchema],
   },
@@ -50,6 +55,7 @@ const thoughtSchema = new Schema(
     toJSON: {
       getters: true,
     },
+    id: false,
   }
 );
 
