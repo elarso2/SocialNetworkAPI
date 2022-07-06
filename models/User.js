@@ -2,7 +2,7 @@ const { Schema, Types } = require("mongoose");
 const thoughtSchema = require("./Thought");
 const reactionSchema = require("./Reaction");
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      match: /.+\@.+\..+/,
+      validate: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
     },
     thoughts: [
       {
