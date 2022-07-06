@@ -14,4 +14,19 @@ connection.once("open", async () => {
 
   // empty array for users
   const users = [];
+
+  // empty array for thoughts
+  const thoughts = [];
+
+  // Add users to collection
+  await User.collection.insertMany(users);
+
+  // Add thoughts to collection
+  await Thought.collection.insertMany(thoughts);
+
+  // Log seed data to show what will appear in database
+  console.table(users);
+  console.table(thoughts);
+  console.info("Seeding Complete.");
+  process.exit(0);
 });
