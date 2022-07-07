@@ -30,17 +30,26 @@ module.exports = {
   },
 
   // put to update a user
-  updateUser(req, res) {},
+  updateUser(req, res) {
+    User.findOneAndUpdate({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user found." })
+          : res.json({ message: "User successfully updated." })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 
   // delete a user by id
-  //   deleteUser(req,res) {
-  //       User.findOneAndRemove({ _id: req.params.userId })
-  //       .then((user) =>
-  //         !user
-  //             ? res.status(404).json({ message: "No user exists with that ID."})
-  //       );
-  //   }
-  deleteUser(req, res) {},
+  deleteUser(req, res) {
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(400).json({ message: "No user found." })
+          : res.json({ message: "User successfully deleted." })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 
   // add friend
   addFriend() {},
