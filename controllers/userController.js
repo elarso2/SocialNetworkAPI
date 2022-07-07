@@ -39,7 +39,7 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found." })
-          : res.json({ message: "User successfully updated." })
+          : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
@@ -76,6 +76,12 @@ module.exports = {
       { _id: req.params.userId },
       { $pull: req.params.friendId },
       { runValidators: true, new: true }
-    );
+    )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user with this id found. " })
+          : res.json(user)
+      )
+      .catch((err) => res.json(err));
   },
 };
