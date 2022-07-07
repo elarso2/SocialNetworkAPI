@@ -40,4 +40,11 @@ module.exports = {
   //             ? res.status(404).json({ message: "No user exists with that ID."})
   //       );
   //   }
+  deleteUser(req, res) {},
+
+  // add friend
+  addFriend() {},
+
+  // delete friend
+  deleteFriend() {},
 };
