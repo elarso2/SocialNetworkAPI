@@ -31,7 +31,11 @@ module.exports = {
 
   // put to update a user
   updateUser(req, res) {
-    User.findOneAndUpdate({ _id: req.params.userId })
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    )
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found." })
