@@ -4,9 +4,38 @@
 
 ## Description
 
+The goal of this assignment was to create a backend program for a Social Networking API. This program is meant to allow users and their thoughts to be created, updated, and deleted, as well as allow them to add friends and react to their friend's thoughts. This application utilizes MongoDB and the mongoose npm package to create a document oriented database, which allows for more flexibility of unstructured data.
+
+## User Story
+
+```md
+AS A social media startup
+I WANT an API for my social network that uses a NoSQL database
+SO THAT my website can handle large amounts of unstructured data
+```
+
+## Routes
+
+A myriad of routes were created for this program:
+
+### User Routes
+
+- **GET** all users, **POST** a new user: `/api/users`
+- **GET** a user by ID (and populate their thoughts and friends), **PUT** to update a user, and **DELETE** a user: `/api/users/:userId`
+- **POST** a new friend, or **DELETE** a friend: `/api/users/:userId/friends/:friendId`
+
+### Thought Routes
+
+- **GET** all thoughts, **POST** a new thought: `/api/thoughts`
+- **GET** a thought by ID, **PUT** to update a thought, **DELETE** a thought: `/api/thoughts/:thoughtId`
+- **POST** a thought reaction: `/api/thoughts/:thoughtId/reactions`
+- **DELETE** a thought reation: `/api/thoughts/:thoughtId/reactions/:reactionId`
+
 ## Demonstration
 
 ## Dependencies
+
+This application requires `mongoose` and `express` packages for proper function.
 
 ## License
 
