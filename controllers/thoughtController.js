@@ -4,15 +4,15 @@ const { User, Thought } = require("../models");
 module.exports = {
   // get all thoughts
   getThoughts(req, res) {
-    Thought.find().then((thoughts) =>
-      res.json(thoughts).catch((err) => res.status(500).json(err))
-    );
+    Thought.find()
+      .then((thoughts) => res.json(thoughts))
+      .catch((err) => res.status(500).json(err));
   },
 
   // get thought by id
   getThoughtById(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      .then((thought) =>
+      .then(async (thought) =>
         !thought
           ? res.status(404).json({ message: "No thought with this id found." })
           : res.json(thought)
@@ -23,7 +23,18 @@ module.exports = {
   // create a new thought
   createThought(req, res) {
     Thought.create(req.body)
-      .then((thought) => res.json(thought))
+      .then((thought) =>
+        User.findOneAndUpdate(
+          { _id: req.body.userId },
+          { $addToSet: { thoughts: thought._id } },
+          { runValidators: true, new: true }
+        )
+      )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user found." })
+          : res.json(user)
+      )
       .catch((err) => res.status(500).json(err));
   },
 

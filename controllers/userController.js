@@ -4,9 +4,9 @@ const { User, Thought } = require("../models");
 module.exports = {
   // get all users
   getUsers(req, res) {
-    User.find().then((users) =>
-      res.json(users).catch((err) => res.status(500).json(err))
-    );
+    User.find()
+      .then((users) => res.json(users))
+      .catch((err) => res.status(500).json(err));
   },
 
   // get user by id, plus thought and friend data
@@ -74,7 +74,7 @@ module.exports = {
   deleteFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: req.params.friendId },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
