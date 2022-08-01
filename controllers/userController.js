@@ -14,7 +14,7 @@ module.exports = {
     User.findOne({ _id: req.params.userId })
       .populate({ path: "thoughts", select: "-__v" })
       .populate({ path: "friends", select: "-__v" })
-      .select("-__v")
+      // .select("-__v")
       .then(async (user) =>
         !user
           ? res.status(404).json({ message: "No user exists with that ID." })
@@ -26,7 +26,7 @@ module.exports = {
   // post a new user
   createUser(req, res) {
     User.create(req.body)
-      .then((newUser) => res.json(newUser))
+      .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -48,6 +48,9 @@ module.exports = {
   // delete a user by id
   deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) => {
+        return Thought.deleteMany({ username: user.username });
+      })
       .then((user) =>
         !user
           ? res.status(400).json({ message: "No user found." })
@@ -68,7 +71,7 @@ module.exports = {
           ? res.status(404).json({ message: "No user with this id found. " })
           : res.json(user)
       )
-      .catch((err) => res.json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   // delete friend
@@ -83,6 +86,6 @@ module.exports = {
           ? res.status(404).json({ message: "No user with this id found. " })
           : res.json(user)
       )
-      .catch((err) => res.json(err));
+      .catch((err) => res.status(500).json(err));
   },
 };
