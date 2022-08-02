@@ -14,7 +14,7 @@ module.exports = {
     User.findOne({ _id: req.params.userId })
       .populate({ path: "thoughts", select: "-__v" })
       .populate({ path: "friends", select: "-__v" })
-      // .select("-__v")
+      .select("-__v")
       .then(async (user) =>
         !user
           ? res.status(404).json({ message: "No user exists with that ID." })
