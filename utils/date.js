@@ -1,4 +1,4 @@
-const formatDate = function () {
+const formatDate = function (timestamp) {
   return this.createdAt.toLocaleDateString("en-us", {
     weekday: "long",
     year: "numeric",
