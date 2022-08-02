@@ -33,9 +33,17 @@ A myriad of routes were created for this program:
 
 ## Demonstration
 
+All functioning user routes can be found by viewing [this video](https://drive.google.com/file/d/1pIDxuJd93z2-cb6e4n4x5ZlJw9njaUrC/view).
+
+Thoughts routes can be viewed in [this video](https://drive.google.com/file/d/1rF6M-aymhTRtLJJT8FiacNGFkgBISVQG/view).
+
+## Current Issues
+
+On the Delete Reaction route for thoughts, the message "Reaction Deleted" is displayed after the route is processed, however, when viewing All Thoughts again, it appears the reaction deletion either isn't properly cascading, or the route doesn't truly function.
+
 ## Dependencies
 
-This application requires `mongoose` and `express` packages for proper function.
+This application requires `mongoose`, `express`, and `moment` packages for proper function.
 
 ## License
 
